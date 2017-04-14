@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 # Package: cenim.nn
 
-from cenim.movies import *
-from prepare import *
+import cenim.data.movie_data as md
+import cenim.data.user_data as ud
 
 
 def run():
-    prepare()
-    print(get_movies_matrix(['1299398']).shape)
+    pass

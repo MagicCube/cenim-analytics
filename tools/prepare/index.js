@@ -5,36 +5,36 @@ const ratings = require('../../data/ratings.json');
 
 console.log('Preparing...\n');
 
-const OUTPUT_SESSIONS_PATH = path.resolve(__dirname, '../../data/sessions.json');
-const OUTPUT_SESSIONS_ALL_PATH = path.resolve(__dirname, '../../data/sessions-all.json');
+const OUTPUT_USERS_PATH = path.resolve(__dirname, '../../data/user-movie.json');
+const OUTPUT_USERS_ALL_PATH = path.resolve(__dirname, '../../data/user-movie-all.json');
 
-const sessions = [];
-let session = null;
+const users = [];
+let user = null;
 ratings.forEach((rating) => {
-  if (session === null || session.id !== rating.sessionId) {
-    session = {
+  if (user === null || user.id !== rating.sessionId) {
+    user = {
       id: rating.sessionId,
       likes: [],
       dislikes: []
     };
-    sessions.push(session);
+    users.push(user);
   }
   if (rating.value > 0) {
-    if (!session.likes.includes(rating.movieId)) {
-      session.likes.push(rating.movieId);
+    if (!user.likes.includes(rating.movieId)) {
+      user.likes.push(rating.movieId);
     }
   } else if (rating.value < 0) {
-    if (!session.dislikes.includes(rating.movieId)) {
-      session.dislikes.push(rating.movieId);
+    if (!user.dislikes.includes(rating.movieId)) {
+      user.dislikes.push(rating.movieId);
     }
   }
 });
 
-fs.writeFileSync(OUTPUT_SESSIONS_ALL_PATH, JSON.stringify(sessions));
-console.log(`All ${sessions.length} sessions have been written to ${OUTPUT_SESSIONS_ALL_PATH}`);
+fs.writeFileSync(OUTPUT_USERS_ALL_PATH, JSON.stringify(users));
+console.log(`All ${users.length} users have been written to ${OUTPUT_USERS_ALL_PATH}`);
 
-const topQualitySessions = sessions.filter(s => s.likes.length + s.dislikes.length >= 3);
-fs.writeFileSync(OUTPUT_SESSIONS_ALL_PATH, JSON.stringify(topQualitySessions));
-console.log(`${topQualitySessions.length} top-quality sessions have been written to ${OUTPUT_SESSIONS_PATH}`);
+const topQualityUsers = users.filter(u => u.likes.length + u.dislikes.length >= 3);
+fs.writeFileSync(OUTPUT_USERS_PATH, JSON.stringify(topQualityUsers));
+console.log(`${topQualityUsers.length} top-quality users have been written to ${OUTPUT_USERS_PATH}`);
 
 console.log('\nPreparations done.');

@@ -15,10 +15,12 @@ user_dict = {}
 
 def __load_users():
     global user_dict
+    print('Loading users...')
     for user_movies in load_data('user-movie'):
         user = gen_user(user_movies)
         users.append(user)
         user_dict[user['id']] = user
+    print(''.join(['[DONE] - ', str(len(users)), ' users were loaded.\n']))
 
 
 def gen_user(user_movies):

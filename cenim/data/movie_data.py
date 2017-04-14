@@ -16,11 +16,13 @@ movie_dict = {}
 
 def __load_movies():
     global movies, movie_dict, MOVIE_FEATURE_SIZE
+    print('Loading movies...')
     movies = load_data('movies')
     MOVIE_FEATURE_SIZE = len(movies[0]['feature'])
     for movie in movies:
         key = movie['id']
         movie_dict[key] = movie
+    print(''.join(['[DONE] - ', str(len(movies)), ' movies were loaded.\n']))
 
 
 def empty_movie_feature():

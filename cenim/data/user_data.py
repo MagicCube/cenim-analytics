@@ -33,5 +33,36 @@ def gen_user(user_movies):
     return user
 
 
+def has_user(id):
+    return id in user_dict
+
+
+def get_user(id):
+    if id in user_dict:
+        return user_dict[id]
+    else:
+        return None
+
+
+def get_user_feature(id):
+    user = get_user(id)
+    if user:
+        return user['feature']
+    else:
+        return None
+
+
+def combine_user_and_movie_feature(user_id, movie_id):
+    user_feature = get_user_feature(user_id)
+    if user_feature is not None:
+        movie_feature = md.get_movie_feature(movie_id)
+        if movie_feature is not None:
+            return np.concatenate([user_feature, movie_feature])
+        else:
+            return None
+    else:
+        return None
+
+
 if len(users) == 0:
     __load_users()

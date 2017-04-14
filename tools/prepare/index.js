@@ -19,11 +19,11 @@ ratings.forEach((rating) => {
     };
     users.push(user);
   }
-  if (rating.value > 0) {
+  if (rating.value === 1) {
     if (!user.likes.includes(rating.movieId)) {
       user.likes.push(rating.movieId);
     }
-  } else if (rating.value < 0) {
+  } else if (rating.value === -1) {
     if (!user.dislikes.includes(rating.movieId)) {
       user.dislikes.push(rating.movieId);
     }

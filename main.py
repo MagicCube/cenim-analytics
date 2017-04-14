@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from cenim.nn import run
+from tests.dnn_test import test
 
 
-run()
+test()

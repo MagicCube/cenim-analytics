@@ -8,7 +8,7 @@ import cenim.data.movie_data as md
 import cenim.data.user_data as ud
 from cenim.utils import load_data
 
-from dnn import DnnClassifier
+from cenim.models import DnnClassifier
 
 
 def build_dnn(sess):
@@ -41,7 +41,7 @@ def gen_training_data():
     return (np.array(X), np.array(Y))
 
 
-def run():
+def test():
     (X, Y) = gen_training_data()
     with tf.Session() as sess:
         dnn = build_dnn(sess)

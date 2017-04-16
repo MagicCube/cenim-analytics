@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# Module: cenim.tests.dnn_test.data_set
+# Module: cenim.data.input_data
 
 import numpy as np
 
-import cenim.data.movie_data as md
-import cenim.data.user_data as ud
 from cenim.utils import load_data
+
+import movie_data as md
+import user_data as ud
 
 # Global Variables
 __samples = []

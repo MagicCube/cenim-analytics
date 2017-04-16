@@ -1,1 +1,1 @@
-from dnn_classifier import DnnClassifier
+from dnn import DnnClassifier

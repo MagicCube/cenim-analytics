@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Module: cenim.nn.Dnn
+# Module: cenim.models.Dnn
 
 import tensorflow as tf
 

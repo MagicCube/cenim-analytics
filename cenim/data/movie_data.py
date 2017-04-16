@@ -10,19 +10,19 @@ from cenim.utils import load_data
 MOVIE_FEATURE_SIZE = 0
 
 # Global Variables
-movies = []
-movie_dict = {}
+__movies = []
+__movie_dict = {}
 
 
-def __load_movies():
-    global movies, movie_dict, MOVIE_FEATURE_SIZE
+def __initial_load():
+    global __movies, __movie_dict, MOVIE_FEATURE_SIZE
     print('Loading movies...')
-    movies = load_data('movies')
-    MOVIE_FEATURE_SIZE = len(movies[0]['feature'])
-    for movie in movies:
+    __movies = load_data('movies')
+    MOVIE_FEATURE_SIZE = len(__movies[0]['feature'])
+    for movie in __movies:
         key = movie['id']
-        movie_dict[key] = movie
-    print(''.join(['[DONE] - ', str(len(movies)), ' movies were loaded.\n']))
+        __movie_dict[key] = movie
+    print(''.join(['[DONE] - ', str(len(__movies)), ' movies were loaded.\n']))
 
 
 def empty_movie_feature():
@@ -30,8 +30,8 @@ def empty_movie_feature():
 
 
 def get_movie(id):
-    if id in movie_dict:
-        return movie_dict[id]
+    if id in __movie_dict:
+        return __movie_dict[id]
     else:
         return None
 
@@ -77,5 +77,5 @@ def sum_movie_features(ids):
     return merged
 
 
-if len(movies) == 0:
-    __load_movies()
+if len(__movies) == 0:
+    __initial_load()

@@ -1,51 +1,42 @@
 # -*- coding: utf-8 -*-
-# Package: cenim.nn
+# Package: cenim.tests.dnn_test
 
 import numpy as np
 import tensorflow as tf
 
-import cenim.data.movie_data as md
-import cenim.data.user_data as ud
-from cenim.utils import load_data
-
 from cenim.models import DnnClassifier
+from cenim.data.movie_data import MOVIE_FEATURE_SIZE
+
+import input_data
 
 
 def build_dnn(sess):
     print('Building DNN...')
-    n_input = md.MOVIE_FEATURE_SIZE * 3
+    n_input = MOVIE_FEATURE_SIZE * 3
     n_classes = 2
+    # Build a 3 layers DNN classifier
     dnn = DnnClassifier(sess, n_input, n_classes)
-    dnn.add_hidden_layer(md.MOVIE_FEATURE_SIZE)
-    dnn.add_output_layer()
+    #dnn.add_hidden_layer(MOVIE_FEATURE_SIZE * 2, tf.nn.tanh)
+    dnn.add_output_layer(tf.nn.softmax)
     print('[DONE] - DNN has been built.\n')
     return dnn
 
 
-def gen_training_data():
-    X = []
-    Y = []
-    print('Generating training data...\n')
-    for rating in load_data('ratings'):
-        user_id = rating['sessionId']
-        rating_value = rating['value']
-        if ud.has_user(user_id) and (rating_value == -1 or rating_value == 1):
-            movie_id = rating['movieId']
-            x = ud.combine_user_and_movie_feature(user_id, movie_id)
-            X.append(x)
-            if rating_value == 1:
-                Y.append([1, 0])
-            elif rating_value == -1:
-                Y.append([0, 1])
-    print('[Done] Training data has been generated.')
-    return (np.array(X), np.array(Y))
-
-
 def test():
-    (X, Y) = gen_training_data()
     with tf.Session() as sess:
+        # Build DNN and initialize Tensorflow
         dnn = build_dnn(sess)
         sess.run(tf.global_variables_initializer())
-        print(''.join(['Training(', str(len(X)), ' steps)...']))
-        dnn.train(X, Y)
-        print('[Done] Training completed.')
+        # Generate datasets
+        datasets = input_data.gen_datasets()
+        # Start Training
+        print('Training(1000 steps)...')
+        N_ITERATION = 2000
+        for i in xrange(N_ITERATION):
+            (X, Y) = datasets.train.next_batch(100)
+            dnn.train(X, Y)
+            if i % 50 == 0:
+                test_x, test_y = datasets.test
+                accuracy = dnn.compute_accuracy(test_x, test_y)
+                print(str(i * 100 / N_ITERATION) + '% completed with accuracy ' + str(accuracy))
+        print('[Done] 100% completed')

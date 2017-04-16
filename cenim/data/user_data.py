@@ -9,18 +9,17 @@ import movie_data as md
 
 
 # Global Variables
-users = []
-user_dict = {}
+__users = []
+__user_dict = {}
 
 
-def __load_users():
-    global user_dict
+def __initial_load():
     print('Loading users...')
     for user_movies in load_data('user-movie'):
         user = gen_user(user_movies)
-        users.append(user)
-        user_dict[user['id']] = user
-    print(''.join(['[DONE] - ', str(len(users)), ' users were loaded.\n']))
+        __users.append(user)
+        __user_dict[user['id']] = user
+    print(''.join(['[DONE] - ', str(len(__users)), ' users were loaded.\n']))
 
 
 def gen_user(user_movies):
@@ -34,12 +33,12 @@ def gen_user(user_movies):
 
 
 def has_user(id):
-    return id in user_dict
+    return id in __user_dict
 
 
 def get_user(id):
-    if id in user_dict:
-        return user_dict[id]
+    if id in __user_dict:
+        return __user_dict[id]
     else:
         return None
 
@@ -64,5 +63,5 @@ def combine_user_and_movie_feature(user_id, movie_id):
         return None
 
 
-if len(users) == 0:
-    __load_users()
+if len(__users) == 0:
+    __initial_load()

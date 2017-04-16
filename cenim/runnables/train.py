@@ -41,7 +41,7 @@ def save_model(sess):
 
 def train(sess, dnn):
     # Generate datasets
-    datasets = input_data.gen_datasets()
+    datasets = input_data.gen_datasets(0.8)
     # Start Training
     N_ITERATION = 5000
     print('Training(' + str(N_ITERATION) + ' steps)...')

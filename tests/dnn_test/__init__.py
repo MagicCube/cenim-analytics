@@ -16,7 +16,7 @@ def build_dnn(sess):
     n_classes = 2
     # Build a 3 layers DNN classifier
     dnn = DnnClassifier(sess, n_input, n_classes)
-    #dnn.add_hidden_layer(MOVIE_FEATURE_SIZE * 2, tf.nn.tanh)
+    # dnn.add_hidden_layer(MOVIE_FEATURE_SIZE * 2)
     dnn.add_output_layer(tf.nn.softmax)
     print('[DONE] - DNN has been built.\n')
     return dnn
@@ -30,13 +30,13 @@ def test():
         # Generate datasets
         datasets = input_data.gen_datasets()
         # Start Training
-        print('Training(1000 steps)...')
         N_ITERATION = 2000
+        print('Training(' + str(N_ITERATION) + ' steps)...')
         for i in xrange(N_ITERATION):
             (X, Y) = datasets.train.next_batch(100)
             dnn.train(X, Y)
-            if i % 50 == 0:
+            if i % (N_ITERATION / 5) == 0:
                 test_x, test_y = datasets.test
                 accuracy = dnn.compute_accuracy(test_x, test_y)
-                print(str(i * 100 / N_ITERATION) + '% completed with accuracy ' + str(accuracy))
+                print(str(i * 100 / N_ITERATION) + '% completed with accuracy ' + str(accuracy * 100) + '%')
         print('[Done] 100% completed')

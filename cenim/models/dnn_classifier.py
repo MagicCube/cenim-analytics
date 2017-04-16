@@ -3,6 +3,7 @@
 
 import tensorflow as tf
 
+
 class DnnClassifier(object):
     def __init__(self, session, n_input, n_classes):
         self.__session = session
@@ -51,7 +52,7 @@ class DnnClassifier(object):
     @staticmethod
     def create_loss_func(input, prediction):
         # Cross entropy
-        return -tf.reduce_sum(input * tf.log(tf.clip_by_value(prediction, 1e-10,1.0)))
+        return -tf.reduce_sum(input * tf.log(tf.clip_by_value(prediction, 1e-10, 1.0)))
 
     def train(self, x, y):
         if self.__train_step is None:

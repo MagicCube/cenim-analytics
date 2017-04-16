@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # Module: cenim.tests.dnn.train
 
+import os.path
+
 import numpy as np
 import tensorflow as tf
 
@@ -28,7 +30,7 @@ def build_model(sess):
 
 def load_model(sess):
     print("Loading model from file: %s..." % MODEL_PATH)
-    saver.restore(sess, MODEL_PATH)
+    __saver.restore(sess, MODEL_PATH)
     pass
 
 
@@ -59,7 +61,14 @@ def run():
     with tf.Session() as sess:
         # Build DNN and initialize Tensorflow
         dnn = build_model(sess)
-        # Initialize variables
-        sess.run(tf.global_variables_initializer())
+        # Restore model from local or initialize for the
+        # first time
         __saver = tf.train.Saver()
+        if os.path.isfile(MODEL_PATH):
+            sess.run(tf.global_variables_initializer())
+        else:
+            load_model(sess)
+        # Start training
         train(sess, dnn)
+        # Save model
+        save_model(sess)

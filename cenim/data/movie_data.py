@@ -22,7 +22,7 @@ def __initial_load():
     for movie in __movies:
         key = movie['id']
         __movie_dict[key] = movie
-    print(''.join(['[DONE] - ', str(len(__movies)), ' movies were loaded.\n']))
+    print('[DONE] - %d movies were loaded.\n' % len(__movies))
 
 
 def empty_movie_feature():

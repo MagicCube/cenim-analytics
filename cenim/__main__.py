@@ -10,8 +10,5 @@ def main(args=None):
     if len(args) == 0:
         train()
 
-    print("This is the main routine.")
-    print("It should do something interesting.")
-
 if __name__ == "__main__":
     main()

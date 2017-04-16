@@ -19,7 +19,7 @@ def __initial_load():
         user = gen_user(user_movies)
         __users.append(user)
         __user_dict[user['id']] = user
-    print(''.join(['[DONE] - ', str(len(__users)), ' users were loaded.\n']))
+    print('[DONE] - %d users were loaded.\n' % len(__users))
 
 
 def gen_user(user_movies):

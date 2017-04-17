@@ -1,1 +1,38 @@
 @import 'index.less';
+
+#cnm-root, .cnm-analysis-app {
+  width: 100%;
+  height: 100%;
+}
+
+.cnm-analysis-app {
+  display: flex;
+
+  > section {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 20px;
+
+    > header {
+      height: 60px;
+      flex-shrink: 0;
+    }
+
+    > main {
+      flex-grow: 1;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    &.all {
+      border-right: 1px solid #666;
+    }
+
+    .cnm-lo-lo-mo-cover {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+}

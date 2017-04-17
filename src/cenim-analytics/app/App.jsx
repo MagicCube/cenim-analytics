@@ -30,7 +30,7 @@ export default class App extends React.Component {
   }
 
   async handleMoClick(movie) {
-    if (!this.state.selections.includes(movie)) {
+    if (!movie.selected) {
       movie.selected = true;
       this.state.selections.push(movie);
     } else {

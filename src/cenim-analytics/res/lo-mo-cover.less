@@ -9,10 +9,30 @@
     margin: 6px;
     padding: 0;
     cursor: pointer;
+    position: relative;
+
+    .check {
+      display: none;
+      width: 42px;
+      height: 42px;
+      background: url(images/check.png);
+      background-size: cover;
+      position: absolute;
+      top: (150 - 42) / 2px;
+      right: (100 - 42) / 2px
+    }
 
     &.empty {
       color: gray;
       cursor: auto;
+    }
+
+    &.selected {
+      opacity: 0.8;
+
+      .check {
+        display: block;
+      }
     }
   }
 }

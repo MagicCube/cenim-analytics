@@ -18,7 +18,7 @@ export default class LoLoMoCover extends React.Component {
         {this.props.data.map((cluster, i) => (
           <li key={`cluster-${i}`}>
             <div>{cluster._tags.join(', ')}</div>
-            <LoMoCover data={cluster.movies} onMoClick={movie => this.handleMoClick(movie)} />
+            <LoMoCover data={cluster.movies} displayCheck={this.props.displayCheck} onMoClick={movie => this.handleMoClick(movie)} />
           </li>
         ))}
       </ul>

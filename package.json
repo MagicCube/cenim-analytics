@@ -27,7 +27,8 @@
     "cross-env": "^3.2.3",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
-    "mongoose": "^4.9.4"
+    "mongoose": "^4.9.4",
+    "numjs": "^0.13.1"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",

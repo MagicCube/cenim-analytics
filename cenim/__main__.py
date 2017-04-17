@@ -9,6 +9,8 @@ def main(args=None):
         args = sys.argv[1:]
     if len(args) == 0:
         train()
+    elif args[0] == 'train':
+        train()
 
 if __name__ == "__main__":
     main()

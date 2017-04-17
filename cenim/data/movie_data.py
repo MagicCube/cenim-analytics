@@ -25,6 +25,10 @@ def __initial_load():
     print('[DONE] - %d movies were loaded.\n' % len(__movies))
 
 
+def get_all_movies():
+    return __movies
+
+
 def empty_movie_feature():
     return np.zeros((MOVIE_FEATURE_SIZE,), dtype=int)
 

@@ -1,5 +1,6 @@
 import sys
 
+from runnables.test import run as test
 from runnables.train import run as train
 
 
@@ -11,6 +12,8 @@ def main(args=None):
         train()
     elif args[0] == 'train':
         train()
+    elif args[0] == 'test':
+        test()
 
 if __name__ == "__main__":
     main()

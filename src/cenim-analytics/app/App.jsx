@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { loadClusters } from '../api';
+import { getRecommendations, loadClusters } from '../api';
 import LoLoMoCover from '../components/LoLoMoCover';
 import LoMoCover from '../components/LoMoCover';
 
@@ -15,8 +15,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       clusters: [],
-      selectedMovies: [],
-      recommendedMovies: []
+      selections: [],
+      recomendations: []
     };
   }
 
@@ -29,16 +29,18 @@ export default class App extends React.Component {
     this.setState({ clusters });
   }
 
-  handleMoClick(movie) {
-    if (!this.state.selectedMovies.includes(movie)) {
+  async handleMoClick(movie) {
+    if (!this.state.selections.includes(movie)) {
       movie.selected = true;
-      this.state.selectedMovies.push(movie);
+      this.state.selections.push(movie);
     } else {
       movie.selected = false;
-      const index = this.state.selectedMovies.indexOf(movie);
-      this.state.selectedMovies.splice(index, 1);
+      const index = this.state.selections.indexOf(movie);
+      this.state.selections.splice(index, 1);
     }
     this.forceUpdate();
+    const recomendations = await getRecommendations(this.state.selections.map(m => m.id));
+    this.setState({ recomendations });
   }
 
   render() {
@@ -55,12 +57,12 @@ export default class App extends React.Component {
 
         <section className="recommendations">
           <div>
-            <h3>选中的影片 (<span>{this.state.selectedMovies.length}</span> 部)</h3>
-            <LoMoCover data={this.state.selectedMovies} small={true} displayTitle={false} onMoClick={movie => this.handleMoClick(movie)} />
+            <h3>选中的影片 (<span>{this.state.selections.length}</span> 部)</h3>
+            <LoMoCover data={this.state.selections} small={true} displayTitle={false} onMoClick={movie => this.handleMoClick(movie)} />
           </div>
           <div>
-            <h3>推荐的影片 (<span>{this.state.recommendedMovies.length}</span> 部)</h3>
-            <LoMoCover data={this.state.recommendedMovies} onMoClick={movie => this.handleMoClick(movie)} />
+            <h3>推荐的影片 (<span>{this.state.recomendations.length}</span> 部)</h3>
+            <LoMoCover data={this.state.recomendations} onMoClick={movie => this.handleMoClick(movie)} />
           </div>
         </section>
       </div>

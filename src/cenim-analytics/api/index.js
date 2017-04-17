@@ -9,3 +9,8 @@ export async function loadClusters() {
   const clusters = await get('/data/clusters-25.json');
   return clusters;
 }
+
+export async function getRecommendations(selections) {
+  const recommendation = await post('/api/recommendation', selections);
+  return recommendation;
+}

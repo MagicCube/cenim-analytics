@@ -1,8 +1,11 @@
 {
-  "extends": "airbnb-base",
+  "extends": "airbnb",
   "plugins": [
+    "react",
+    "jsx-a11y",
     "import"
   ],
+  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "node": true
@@ -17,6 +20,9 @@
     "import/no-extraneous-dependencies": [
       "off"
     ],
+    "jsx-a11y/no-static-element-interactions": [
+      "off"
+    ],
     "max-len": [
       "off"
     ],
@@ -27,6 +33,9 @@
       "off"
     ],
     "no-use-before-define": [
+      "off"
+    ],
+    "react/forbid-prop-types": [
       "off"
     ]
   },

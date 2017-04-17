@@ -18,6 +18,7 @@ class DnnClassifier(Classifier):
         weights = tf.Variable(tf.random_normal([self.__output_layer_size, size]))
         biases = tf.Variable(tf.zeros([1, size]) + 0.1,)
         wx_plus_b = tf.matmul(self.__output_layer, weights) + biases
+        wx_plus_b = tf.nn.dropout(wx_plus_b, self.keep_prob)
         if activation_function is None:
             outputs = wx_plus_b
         else:

@@ -64,7 +64,7 @@ def run():
         # Restore model from local or initialize for the
         # first time
         __saver = tf.train.Saver()
-        if os.path.isfile(MODEL_PATH):
+        if not(os.path.exists(MODEL_PATH + '.index')):
             sess.run(tf.global_variables_initializer())
         else:
             load_model(sess)

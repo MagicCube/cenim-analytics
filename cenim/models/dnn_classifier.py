@@ -25,15 +25,18 @@ class DnnClassifier(Classifier):
             outputs = activation_function(wx_plus_b,)
         self.__output_layer = outputs
         self.__output_layer_size = size
-        return self.__output_layer
+        return (weights, biases)
 
     def add_hidden_layer(self, n_neuron, activation_function=None):
-        self.add_layer(n_neuron, activation_function=None)
+        (weights, biases) = self.add_layer(n_neuron, activation_function=None)
+        return (weights, biases)
 
     def add_output_layer(self, activation_function=None):
-        self._prediction = self.add_layer(self.n_classes, activation_function)
+        (weights, biases) = self.add_layer(self.n_classes, activation_function)
+        self._prediction = self.__output_layer
         cross_entropy = -tf.reduce_sum(self.input_y * tf.log(tf.clip_by_value(self._prediction, 1e-10, 1.0)))
         self._train_step = tf.train.GradientDescentOptimizer(0.1).minimize(cross_entropy)
+        return (weights, biases)
 
     def get_prediction(self):
         if self._prediction is None:

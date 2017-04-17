@@ -8,6 +8,7 @@ import tensorflow as tf
 
 from cenim.data import input_data, MOVIE_FEATURE_SIZE
 from cenim.models import DnnClassifier
+from cenim.utils import save_data
 
 
 # Constants
@@ -15,15 +16,20 @@ MODEL_PATH = './data/models/dnn.ckpt'
 
 # Global Variables
 __saver = None
+__weights = None
+__biases = None
 
 
 def build_model(sess):
+    global __weights, __biases
     print('Building DNN model...')
     n_input = MOVIE_FEATURE_SIZE * 3
     n_classes = 2
     # Build a 3 layers DNN classifier
     dnn = DnnClassifier(sess, n_input, n_classes)
-    dnn.add_output_layer(tf.nn.softmax)
+    (weights, biases) = dnn.add_output_layer(tf.nn.softmax)
+    __weights = weights
+    __biases = biases
     print('[DONE] - DNN model has been built.\n')
     return dnn
 
@@ -43,7 +49,7 @@ def train(sess, dnn):
     # Generate datasets
     datasets = input_data.gen_datasets(0.8)
     # Start Training
-    N_ITERATION = 5000
+    N_ITERATION = 1000
     print('Training(' + str(N_ITERATION) + ' steps)...')
     for i in xrange(N_ITERATION):
         (X, Y) = datasets.train.next_batch(100)
@@ -71,4 +77,9 @@ def run():
         # Start training
         train(sess, dnn)
         # Save model
+        (weights, biases) = sess.run([__weights, __biases])
+        save_data({
+            'weights': weights.tolist(),
+            'biases': biases.tolist()
+        }, 'models/checkpoint')
         save_model(sess)

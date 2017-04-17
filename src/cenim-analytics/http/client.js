@@ -19,7 +19,7 @@ export function post(url, params = null) {
     xhr.open('POST', url);
     xhr.onload = () => {
       if (xhr.status === 200) {
-        if (xhr.getResponseHeader('Content-Type').toLocaleLowerCase() === 'application/json') {
+        if (xhr.getResponseHeader('Content-Type').toLocaleLowerCase().includes('application/json')) {
           resolve(JSON.parse(xhr.responseText));
         } else {
           resolve(xhr.responseText);

@@ -1,22 +1,6 @@
 [
   {
     "_tags": [
-      "杰拉尔·乌里",
-      "搞笑",
-      "经典",
-      "喜剧",
-      "二战"
-    ],
-    "movies": [
-      {
-        "id": "1296909",
-        "img": "http://img7.doubanio.com/view/movie_poster_cover/lpst/public/p2399597512.jpg",
-        "title": "虎口脱险"
-      }
-    ]
-  },
-  {
-    "_tags": [
       "剧情",
       "人生",
       "美国",
@@ -161,6 +145,11 @@
       "喜剧"
     ],
     "movies": [
+      {
+        "id": "1296909",
+        "img": "http://img7.doubanio.com/view/movie_poster_cover/lpst/public/p2399597512.jpg",
+        "title": "虎口脱险"
+      },
       {
         "id": "3793023",
         "img": "http://img7.doubanio.com/view/movie_poster_cover/lpst/public/p579729551.jpg",

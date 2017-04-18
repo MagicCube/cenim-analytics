@@ -49,7 +49,7 @@ def train(sess, dnn):
     # Generate datasets
     datasets = input_data.gen_datasets(0.8)
     # Start Training
-    N_ITERATION = 5000
+    N_ITERATION = 10000
     print('Training(' + str(N_ITERATION) + ' steps)...')
     for i in xrange(N_ITERATION):
         (X, Y) = datasets.train.next_batch(100)

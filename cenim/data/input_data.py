@@ -61,7 +61,6 @@ def gen_datasets(training_percentage=0.8):
     samples = __samples[:]
     # 80% for training, 20% for test/validation
     training_count = int(len(samples) * training_percentage)
-    test_count = len(samples) - training_count
     np.random.shuffle(samples)
     return Datasets(
         samples[0:training_count],

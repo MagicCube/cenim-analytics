@@ -28,7 +28,8 @@ def gen_user(user_movies):
     }
     likes = md.merge_movie_features(user_movies['likes'])
     dislikes = md.merge_movie_features(user_movies['dislikes'])
-    user['feature'] = np.concatenate([likes, dislikes])
+    skips = md.merge_movie_features(user_movies['skips'])
+    user['feature'] = np.concatenate([likes, dislikes, skips])
     return user
 
 

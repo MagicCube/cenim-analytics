@@ -42,11 +42,17 @@ def __initial_load():
     for rating in load_data('ratings'):
         user_id = rating['sessionId']
         rating_value = rating['value']
-        if ud.has_user(user_id) and (rating_value == -1 or rating_value == 1):
+        if ud.has_user(user_id) and (rating_value == -1 or rating_value == 1 or rating_value == 0):
             movie_id = rating['movieId']
+            if rating_value == 1:
+                label = [1, 0, 0]
+            elif rating_value == 0:
+                label = [0, 1, 0]
+            elif rating_value == -1:
+                label = [0, 0, 1]
             __samples.append({
                 'x': ud.combine_user_and_movie_feature(user_id, movie_id),
-                'y': [1, 0] if rating_value == 1 else [0, 1]
+                'y': label
             })
     print('[Done] Input samples has been loaded.')
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Module: cenim.models.Model
 
+import numpy as np
 import tensorflow as tf
 
 
@@ -38,12 +39,19 @@ class Classifier(Model):
         prediction = self.get_prediction()
         y_pred = self.session.run(prediction, feed_dict={self.input_x: x, self.keep_prob: 1})
 
+        likes = 0
         dislikes = 0
+        skips = 0
         for pred in y_pred:
-            if pred[0] == 0 and pred[1] == 1:
+            pred = pred.tolist()
+            if pred == [1, 0, 0]:
+                likes += 1
+            if pred == [0, 1, 0]:
+                skips += 1
+            elif pred == [0, 0, 1]:
                 dislikes += 1
         print(y_pred)
-        print('Dislikes: ' + str(dislikes))
+        print('Likes: ' + str(likes) + ', dislikes: ' + str(dislikes) + ', skips: ' + str(skips))
 
         correct_prediction = tf.equal(tf.argmax(y_pred, 1), tf.argmax(y, 1))
         accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))

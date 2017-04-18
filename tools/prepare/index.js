@@ -15,7 +15,8 @@ ratings.forEach((rating) => {
     user = {
       id: rating.sessionId,
       likes: [],
-      dislikes: []
+      dislikes: [],
+      skips: []
     };
     users.push(user);
   }
@@ -26,6 +27,10 @@ ratings.forEach((rating) => {
   } else if (rating.value === -1) {
     if (!user.dislikes.includes(rating.movieId)) {
       user.dislikes.push(rating.movieId);
+    }
+  } else if (rating.value === 0) {
+    if (!user.skips.includes(rating.movieId)) {
+      user.skips.push(rating.movieId);
     }
   }
 });

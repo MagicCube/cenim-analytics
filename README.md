@@ -19,7 +19,7 @@
 
 ```sh
 
-python main.py
+python -m cenim train
 
 ```
 

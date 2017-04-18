@@ -23,9 +23,9 @@ __biases = None
 def build_model(sess):
     global __weights, __biases
     print('Building DNN model...')
-    n_input = MOVIE_FEATURE_SIZE * 3
-    n_classes = 2
-    # Build a 3 layers DNN classifier
+    n_input = MOVIE_FEATURE_SIZE * 4
+    n_classes = 3
+    # Build a NN classifier
     dnn = DnnClassifier(sess, n_input, n_classes)
     (weights, biases) = dnn.add_output_layer(tf.nn.softmax)
     __weights = weights
@@ -49,7 +49,7 @@ def train(sess, dnn):
     # Generate datasets
     datasets = input_data.gen_datasets(0.8)
     # Start Training
-    N_ITERATION = 1000
+    N_ITERATION = 5000
     print('Training(' + str(N_ITERATION) + ' steps)...')
     for i in xrange(N_ITERATION):
         (X, Y) = datasets.train.next_batch(100)

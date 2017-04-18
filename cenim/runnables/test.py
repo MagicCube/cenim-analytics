@@ -18,7 +18,7 @@ def run():
     for movie in movies:
         movie_feature = movie['feature']
         user_movie_features = np.array([np.concatenate([user_features, movie_feature])])
-        y = np.dot(user_movie_features, weight)
+        y = np.matmul(user_movie_features, weight)
         movie['rate'] = {
             'like': y[0, 0],
             'dislike': y[0, 1],

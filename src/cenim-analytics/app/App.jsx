@@ -56,7 +56,7 @@ export default class App extends React.Component {
         </section>
 
         <section className="recommendations">
-          <div style={{ display: 'none' }}>
+          <div>
             <h3>选中的影片 (<span>{this.state.selections.length}</span> 部)</h3>
             <LoMoCover data={this.state.selections} small={true} displayTitle={false} onMoClick={movie => this.handleMoClick(movie)} />
           </div>

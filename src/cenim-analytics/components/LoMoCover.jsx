@@ -18,15 +18,6 @@ export default class LoMoCover extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.data !== this.props.data) {
-      return true;
-    }
-    return nextProps.data.some((movie, i) => {
-      return movie.selected !== this.props.data[i].selected;
-    });
-  }
-
   render() {
     return (
       <ul className={this.props.small ? "cnm-lo-mo-cover small" : "cnm-lo-mo-cover"}>

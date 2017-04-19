@@ -40,7 +40,7 @@ export default class App extends React.Component {
       selections.splice(index, 1);
     }
     const recomendations = await getRecommendations(selections.map(m => m.id));
-    this.setState({ recomendations, selections });
+    this.setState({ clusters: [...this.state.clusters], recomendations, selections });
   }
 
   render() {

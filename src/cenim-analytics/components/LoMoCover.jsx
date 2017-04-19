@@ -7,6 +7,7 @@ import '../res/lo-mo-cover.less';
 
 export default class LoMoCover extends React.Component {
   static defaultProps = {
+    data: [],
     displayTitle: true,
     displayCheck: false
   }
@@ -15,6 +16,15 @@ export default class LoMoCover extends React.Component {
     if (typeof this.props.onMoClick === 'function') {
       this.props.onMoClick(movie);
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.data !== this.props.data) {
+      return true;
+    }
+    return nextProps.data.some((movie, i) => {
+      return movie.selected !== this.props.data[i].selected;
+    });
   }
 
   render() {

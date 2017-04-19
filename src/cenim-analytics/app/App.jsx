@@ -30,17 +30,17 @@ export default class App extends React.Component {
   }
 
   async handleMoClick(movie) {
+    let selections = [...this.state.selections];
     if (!movie.selected) {
       movie.selected = true;
-      this.state.selections.push(movie);
+      selections.push(movie);
     } else {
       movie.selected = false;
       const index = this.state.selections.indexOf(movie);
-      this.state.selections.splice(index, 1);
+      selections.splice(index, 1);
     }
-    this.forceUpdate();
-    const recomendations = await getRecommendations(this.state.selections.map(m => m.id));
-    this.setState({ recomendations });
+    const recomendations = await getRecommendations(selections.map(m => m.id));
+    this.setState({ recomendations, selections });
   }
 
   render() {

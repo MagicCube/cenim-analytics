@@ -1,7 +1,7 @@
 import { get, post } from '../http/client';
 
 export async function loadMovies() {
-  const movies = await get('/data/movies.json');
+  const movies = await get('/data/index.json');
   return movies;
 }
 

@@ -2,8 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { getRecommendations, loadClusters } from '../api';
-import LoLoMoCover from '../components/LoLoMoCover';
+import { getRecommendations, loadMovies } from '../api';
 import LoMoCover from '../components/LoMoCover';
 
 import '../index.html';
@@ -14,7 +13,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clusters: [],
+      movies: [],
       selections: [],
       recomendations: []
     };
@@ -25,8 +24,8 @@ export default class App extends React.Component {
   }
 
   async initialLoad() {
-    const clusters = await loadClusters();
-    this.setState({ clusters });
+    const movies = await loadMovies();
+    this.setState({ movies });
   }
 
   async handleMoClick(movie) {
@@ -40,7 +39,7 @@ export default class App extends React.Component {
       selections.splice(index, 1);
     }
     const recomendations = await getRecommendations(selections.map(m => m.id));
-    this.setState({ clusters: [...this.state.clusters], recomendations, selections });
+    this.setState({ movies: [...this.state.movies], recomendations, selections });
   }
 
   render() {
@@ -51,7 +50,7 @@ export default class App extends React.Component {
             <h3>所有影片</h3>
           </header>
           <main>
-            <LoLoMoCover data={this.state.clusters} displayCheck={true} onMoClick={movie => this.handleMoClick(movie)} />
+            <LoMoCover data={this.state.movies} displayCheck={true} onMoClick={movie => this.handleMoClick(movie)} />
           </main>
         </section>
 

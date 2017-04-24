@@ -5,7 +5,7 @@ import numpy as np
 
 from cenim.utils import load_data
 
-import movie_data as md
+from . import movie_data as md
 
 
 # Global Variables

@@ -4,7 +4,7 @@
 
 ### Python
 
-+ Python 2.7
++ Python 3.x
 + Anaconda 4.3
 + Tensorflow 1.x
 

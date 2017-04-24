@@ -5,8 +5,8 @@ import numpy as np
 
 from cenim.utils import load_data
 
-import movie_data as md
-import user_data as ud
+from . import movie_data as md
+from . import user_data as ud
 
 # Global Variables
 __samples = []

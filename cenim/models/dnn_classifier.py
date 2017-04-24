@@ -3,7 +3,7 @@
 
 import tensorflow as tf
 
-from classifier import Classifier
+from .classifier import Classifier
 
 
 class DnnClassifier(Classifier):

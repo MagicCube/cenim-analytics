@@ -1,7 +1,7 @@
 import sys
 
-from runnables.test import run as test
-from runnables.train import run as train
+from cenim.runnables.test import run as test
+from cenim.runnables.train import run as train
 
 
 def main(args=None):

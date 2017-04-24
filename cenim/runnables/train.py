@@ -51,7 +51,7 @@ def train(sess, dnn):
     # Start Training
     N_ITERATION = 10000
     print('Training(' + str(N_ITERATION) + ' steps)...')
-    for i in xrange(N_ITERATION):
+    for i in range(N_ITERATION):
         (X, Y) = datasets.train.next_batch(100)
         dnn.train(X, Y)
         if i % (N_ITERATION / 5) == 0:

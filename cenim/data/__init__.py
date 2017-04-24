@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Package cenim.data
 
-import input_data
-import movie_data
-import user_data
+from . import input_data
+from . import movie_data
+from . import user_data
 
-from movie_data import MOVIE_FEATURE_SIZE
+from .movie_data import MOVIE_FEATURE_SIZE

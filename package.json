@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "node tools/prepare/index.js",
+    "build": "cross-env NODE_ENV=production webpack -p",
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "node index.js"
   },
